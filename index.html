@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <titleAlloy Antonius Dj Spirit holy @BaradLaguPopulerSepanjangMasa</title>
+ <link rel="icon" type="image/png" href="https://www.youtube.com/favicon.ico">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    #player {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+
+  <script>
+    // Fungsi untuk memuat API YouTube
+    function loadYouTubeAPI() {
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+
+    // Inisialisasi dan memuat pemutar video YouTube
+    function onYouTubeIframeAPIReady() {
+      // Mendapatkan lebar dan tinggi viewport
+      var viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+      var viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      // Hitung aspek rasio video
+      var aspectRatio = 16 / 9; // Sesuaikan dengan aspek rasio video yang diinginkan
+
+      // Tentukan lebar dan tinggi video responsif berdasarkan lebar viewport
+      var videoWidth = viewportWidth;
+      var videoHeight = videoWidth / aspectRatio;
+
+      // Periksa apakah tinggi video responsif melebihi tinggi viewport
+      if (videoHeight > viewportHeight) {
+        videoHeight = viewportHeight;
+        videoWidth = videoHeight * aspectRatio;
+      }
+
+      // Buat instance pemutar video
+      var player = new YT.Player('player', {
+        videoId: '_gat6bccIKo', // Ganti VIDEO_ID dengan ID video YouTube yang ingin Anda sematkan
+        width: videoWidth,
+        height: videoHeight,
+        playerVars: {
+          autoplay: 1, // Autoplay video
+          controls: 1, // Tampilkan kontrol pemutar video
+          fs: 1, // Izinkan tampilan fullscreen
+          modestbranding: 0, // Tampilkan logo YouTube yang lebih kecil
+          rel: 0, // Nonaktifkan video terkait setelah pemutaran selesai
+          showinfo: 0, // Sembunyikan informasi video seperti judul dan pemutar terkait
+          html5: 1, // Gunakan pemutar HTML5
+          playsinline: 0, // Tampilkan pemutar fullscreen di perangkat mobile
+          iv_load_policy: 3 // Nonaktifkan anotasi
+        },
+        events: {
+          'onReady': onPlayerReady
+        }
+      });
+    }
+
+    function onPlayerReady(event) {
+      // Video siap diputar
+      event.target.playVideo();
+    }
+
+    // Muat API YouTube saat halaman selesai dimuat
+    window.onload = loadYouTubeAPI;
+  </script>
+
+</body>
+</html>
